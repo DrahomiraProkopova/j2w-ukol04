@@ -7,23 +7,34 @@
 <body>
 <div class="seznam">
     [#list seznam as vizitka]
-    <a href="/detail/${vizitka?index}">
-        <div class="vizitka">
-            <div class="jmeno">Dita (Přikrylová) Formánková</div>
-            <div class="firma">Czechitas z. s.</div>
-            <div class="udaje">
-                <div class="adresa">
-                    <div>Václavské náměstí 837/11</div>
-                    <div><span>11000</span> Praha 1</div>
-                </div>
-                <div class="kontakty">
-                    <div><i class="bi bi-at"></i> dita@example.com</div>
-                    <div><i class="bi bi-phone"></i> +420 800123456</div>
-                    <div><i class="bi bi-globe"></i> www.czechitas.cz</div>
-                </div>
-            </div>
-        </div>
-    </a>
+             <a href="/detail/${vizitka?index}">
+                 <div class="vizitka">
+                     [#if vizitka.jmeno?has_content]
+                         <div class="jmeno">${vizitka.jmeno}</div>
+                     [/#if]
+                     [#if vizitka.firma?has_content]
+                         <div class="firma">${vizitka.firma}</div>
+                     [/#if]
+                     <div class="udaje">
+                         [#if vizitka.celaAdresa?has_content]
+                             <div class="adresa">
+                                 <div>${vizitka.celaAdresa}</div>
+                             </div>
+                         [/#if]
+                         <div class="kontakty">
+                             [#if vizitka.email?has_content]
+                                 <div><i class="bi bi-at"></i> <span>${vizitka.email}</span></div>
+                             [/#if]
+                             [#if vizitka.telefon?has_content]
+                                 <div><i class="bi bi-phone"></i> <span>${vizitka.telefon}</span></div>
+                             [/#if]
+                             [#if vizitka.web?has_content]
+                                 <div><i class="bi bi-globe"></i> <span>${vizitka.web}</span></div>
+                             [/#if]
+                         </div>
+                     </div>
+                 </div>
+             </a>
     [/#list]
 
     <a href="/nova">
